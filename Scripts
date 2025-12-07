@@ -1,0 +1,15 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
+
+local screenGui = script.Parent
+local tpButton = screenGui:WaitForChild("TPButton") -- кнопка в твоём GUI
+
+tpButton.MouseButton1Click:Connect(function()
+    local base = workspace:FindFirstChild("BasePoint")
+    if base then
+        humanoidRootPart.CFrame = base.CFrame + Vector3.new(0, 3, 0) -- телепорт повыше
+    else
+        warn("BasePoint не найден в Workspace!")
+    end
+end)
