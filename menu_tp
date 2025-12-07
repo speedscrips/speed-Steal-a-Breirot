@@ -1,0 +1,24 @@
+-- Local admin GUI (StarterGui -> ScreenGui -> LocalScript)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local adminEvent = ReplicatedStorage:WaitForChild("AdminCommand")
+
+-- пример: привязка к кнопкам GUI
+local player = game.Players.LocalPlayer
+local screenGui = script.Parent -- допустим скрипт лежит в ScreenGui
+local tpButton = screenGui:WaitForChild("TPButton")       -- кнопка "TP"
+local speedButton = screenGui:WaitForChild("SpeedButton") -- кнопка "Speed"
+local healButton = screenGui:WaitForChild("HealButton")   -- кнопка "Heal"
+
+tpButton.Activated:Connect(function()
+    -- пример: телепорт на waypoint "Spawn"
+    adminEvent:FireServer("tp", "Spawn")
+end)
+
+speedButton.Activated:Connect(function()
+    -- установить скорость 50 (для теста)
+    adminEvent:FireServer("speed", 50)
+end)
+
+healButton.Activated:Connect(function()
+    adminEvent:FireServer("heal")
+end)
